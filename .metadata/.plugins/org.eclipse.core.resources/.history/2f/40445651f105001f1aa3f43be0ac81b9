@@ -1,0 +1,5 @@
+package com.ezen.test.serivce;
+
+public interface FileDAO {
+
+}

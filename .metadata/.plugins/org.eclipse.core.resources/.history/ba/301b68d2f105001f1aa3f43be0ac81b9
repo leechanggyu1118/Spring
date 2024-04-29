@@ -1,0 +1,9 @@
+package com.ezen.test.serivce;
+
+import com.ezen.test.domain.FileVO;
+
+public interface FileDAO {
+	
+	int insertFile(FileVO fvo);
+
+}

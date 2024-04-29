@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<jsp:include page="../layout/header.jsp"></jsp:include>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Board Register Page</h1>
+	<div class="container-md">
+		<form action="">
+		
+			<div class="mb-3">
+				<label for="t" class="form-label">Example label</label> 
+				<input type="text" class="form-control" name="title" id="t" placeholder="Title...">
+			</div>
+
+			<div class="mb-3">
+				<label for="w" class="form-label">Example label</label> 
+				<input type="text" class="form-control" name="writer" id="w"
+					placeholder="Title...">
+			</div>
+
+			<div class="mb-3">
+				<label for="c" class="form-label">Example label</label>
+				<label for="c" class="form-label">Example label</label> 
+				<input type="text" class="form-control" name="content" id="t" placeholder="Title...">
+			</div>
+
+			<button type="submit" class="btn btn-secondary">Secondary</button>
+		</form>
+	</div>
+	
+		<jsp:include page="../layout/footer.jsp"></jsp:include>
+	
+</body>
+</html>

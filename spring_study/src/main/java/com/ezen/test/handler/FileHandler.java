@@ -21,7 +21,7 @@ import net.coobird.thumbnailator.Thumbnails;
 public class FileHandler {
 	
 	//실제 파일이 저장되는 경로
-	private final String UP_DIR="D:\\_myProject\\_java\\_fileUpload";
+	private final String UP_DIR="C:\\leechanggyu\\_myProject\\_java\\_fileUpload";
 
 	public List<FileVO> uploadFiles(MultipartFile[] files) {
 		// 리턴 객체 생성

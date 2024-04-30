@@ -29,7 +29,7 @@
   UPDATE board SET isDel="Y" WHERE bno = #{bno};
   </update>
   <update id="updateReadCount">
-  UPDATE board SET read_count = read_count + 1 WHERE bno = #{bno}
+	UPDATE board SET read_count = read_count + 1 WHERE bno = #{bno}
   </update>
   <select id="getTotal" resultType="int">
   	SELECT COUNT(bno) FROM board WHERE isDel="N"
@@ -38,6 +38,17 @@
   <select id="selectBno" resultType="int">
   	SELECT MAX(bno) FROM board;
   </select>
+  <update id="cmtCountUpdate">
+  UPDATE board b SET cmt_qty = (
+SELECT count(bno) FROM comment
+WHERE bno = b.bno) ;
+  </update>
+  <update id="fileCountUpdae">
+  UPDATE board b SET has_file = (
+SELECT count(bno) FROM file
+WHERE bno = b.bno) ;
+  </update>
+  
   
   <!-- SELECT COUNT(bno) FROM board WHERE isDel="N" AND title LIKE %keyword% OR content LIKE %keyword%  -->
   <!-- SELECT COUNT(bno) FROM board WHERE isDel="N" AND (... OR ... OR ...)  -->

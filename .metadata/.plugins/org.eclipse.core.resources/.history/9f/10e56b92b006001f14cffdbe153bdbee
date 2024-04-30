@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.ezen.test.repository.BoardDAO">
+  <!-- parameterType : 생략가능  -->
+  <insert id="insert" parameterType="com.ezen.test.domain.BoardVO">
+  	INSERT INTO board(title, writer, content)
+  	VALUES(#{title},#{writer},#{content})
+  </insert>
+  
+  <select id="getlist" resultType="com.ezen.test.domain.BoardVO">
+  SELECT * FROM board WHERE isDel='N' 
+  <include refid="search"></include>
+  ORDER BY bno DESC 
+  LIMIT #{pageStart}, #{qty}
+  </select>
+  <select id="getDetail" resultType="com.ezen.test.domain.BoardVO">
+  SELECT * FROM board WHERE bno = #{bno}
+  </select>
+  <update id="update">
+  UPDATE board SET 
+  title = #{title}, 
+  content=#{content}, 
+  read_count = read_count-2 
+  WHERE bno = #{bno}
+  </update>
+  <update id="remove">
+  UPDATE board SET isDel="Y" WHERE bno = #{bno};
+  </update>
+  <update id="updateReadCount">
+
+UPDATE board SET read_count = read_count + 1 WHERE bno = #{bno}
+  
+  </update>
+  <select id="getTotal" resultType="int">
+  	SELECT COUNT(bno) FROM board WHERE isDel="N"
+  	<include refid="search"></include>
+  </select>
+  <select id="selectBno" resultType="int">
+  	SELECT MAX(bno) FROM board;
+  </select>
+  
+  <!-- SELECT COUNT(bno) FROM board WHERE isDel="N" AND title LIKE %keyword% OR content LIKE %keyword%  -->
+  <!-- SELECT COUNT(bno) FROM board WHERE isDel="N" AND (... OR ... OR ...)  -->
+  <!-- title LIKE CONCAT('%', #{keyword}, '%') or writer LIKE CONCAT('%', #{keyword}, '%') -->
+  <sql id="search">
+   <if test="type != null">
+   <trim prefix="and (" suffix=")" suffixOverrides="or">
+   		<foreach collection="typeToArray" item="type">
+   			<trim suffix="or">
+   				<choose>
+   					<when test="type=='t'.toString()">
+   						title LIKE CONCAT('%', #{keyword}, '%')
+   					</when>
+   					<when test="type=='w'.toString()">
+   						writer LIKE CONCAT('%', #{keyword}, '%')
+   					</when>
+   					<when test="type=='c'.toString()">
+   						content LIKE CONCAT('%', #{keyword}, '%')
+   					</when>
+   				</choose>
+   			
+   			</trim>
+   		</foreach>
+   </trim>
+   
+   </if>
+  
+  </sql>
+  
+  
+  
+  
+  </mapper>

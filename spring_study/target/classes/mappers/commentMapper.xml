@@ -10,6 +10,7 @@
   <select id="getList" resultType="com.ezen.test.domain.CommentVO">
   SELECT * FROM comment WHERE bno = #{bno} ORDER BY cno DESC
   </select>
+
   <update id="modify">
   UPDATE comment SET content = #{content} WHERE cno = #{cno}
   </update>

@@ -2,12 +2,17 @@ package com.ezen.test.controller;
 
 
 
-import java.util.List;
+import java.util.List;import javax.print.attribute.standard.Media;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +72,10 @@ public class BoardController {
 		log.info(">>>> pgvo >> {}", pgvo);
 		// 리턴타입은 목적지 경로에 대한 타입(destPage가 리턴)
 		//Model 객체 => request.setAttribute 역할을 하는 객체
+		
+		//cmt_qty, has_file update 후 리스트 가져오기
+		bsv.cmtFileUpdate();
+		
 		List<BoardVO> list = bsv.getList(pgvo);
 		int totalCount = bsv.getTotal(pgvo);
 		PagingHandler ph = new PagingHandler(pgvo, totalCount); 
@@ -90,18 +99,39 @@ public class BoardController {
 		
 	}
 	
-	@PostMapping("modify")
-	public String modify(BoardVO bvo) {
+	@PostMapping("/modify")
+	public String modify(BoardVO bvo, @RequestParam(name = "files", required = false)MultipartFile[] files) {
 		log.info(">>> modify bvo >> {}", bvo);
-		bsv.update(bvo);
+		List<FileVO> flist = null;
+		
+		
+		// fileHandler multipartfile[] => flist
+		if(files[0].getSize() > 0) {
+			flist = fhd.uploadFiles(files);
+		}
+		
+		BoardDTO bdto = new BoardDTO(bvo, flist);
+
+		bsv.update(bdto);
 		// /board/detail.jsp : 새로운 데이터를 가지고 가야 함.
 		return "redirect:/board/detail?bno="+bvo.getBno();
 	}
 	
-	@GetMapping("remove")
+	@GetMapping("/remove")
 	public String remove(@RequestParam("bno")int bno) {
 		bsv.remove(bno);
 		return "redirect:/board/list";
+	}
+	
+	@DeleteMapping(value="/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> removeFile(@PathVariable("uuid")String uuid){
+		log.info(">>>> uuid >> {}", uuid);
+		
+		int isOk = bsv.removeFile(uuid);
+		
+		return isOk > 0? new ResponseEntity<String>("1", HttpStatus.OK) :
+			new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+		
 	}
 	
 	

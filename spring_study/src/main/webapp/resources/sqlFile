@@ -57,3 +57,7 @@ bno INT,
 file_size INT,
 reg_date DATETIME DEFAULT NOW(),
 PRIMARY KEY(uuid));
+
+--2024-04-30
+ALTER TABLE board ADD cmt_qty INT DEFAULT 0;
+ALTER TABLE board ADD has_file INT DEFAULT 0;

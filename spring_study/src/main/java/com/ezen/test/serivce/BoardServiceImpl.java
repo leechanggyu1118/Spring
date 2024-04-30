@@ -65,9 +65,25 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void update(BoardVO bvo) {
+	public void update(BoardDTO bdto) {
 		log.info(">>> board update service check!!");
-		bdao.update(bvo);
+		//파일 추가 작업
+		// bvo => boardMapper / flist => fileMapper
+		int isOk = bdao.update(bdto.getBvo());
+		bdao.update(bdto.getBvo());
+		//파일 값이 없다면
+		if(bdto.getFlist() == null) {
+			return;
+		}
+		
+		//bvo 업데이트 완료 후 파일도 있따면... 파일 추가
+		if(isOk > 0 && bdto.getFlist().size()>0) {
+			//bno setting
+			for(FileVO fvo : bdto.getFlist()) {
+				fvo.setBno(bdto.getBvo().getBno());
+				isOk *= fdao.insertFile(fvo);
+			}
+		}
 		
 	}
 
@@ -81,6 +97,19 @@ public class BoardServiceImpl implements BoardService{
 	public int getTotal(PagingVO pgvo) {
 		log.info(">>> board getTotal service check!!");
 		return bdao.getTotal(pgvo);
+	}
+
+	@Override
+	public int removeFile(String uuid) {
+		// TODO Auto-generated method stub
+		return fdao.removeFile(uuid);
+	}
+
+	@Override
+	public void cmtFileUpdate() {
+		// TODO Auto-generated method stub
+		bdao.cmtCountUpdate();
+		bdao.fileCountUpdae();
 	}
 
 

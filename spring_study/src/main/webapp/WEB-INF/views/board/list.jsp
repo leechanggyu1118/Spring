@@ -55,6 +55,8 @@
 				<th>writer</th>
 				<th>reg_date</th>
 				<th>read_count</th>
+				<th>cmt_qty</th>
+				<th>has_file</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -65,6 +67,8 @@
 			<td>${bvo.writer }</td>
 			<td>${bvo.reg_date }</td>
 			<td>${bvo.read_count }</td>
+			<td>${bvo.cmt_qty }</td>
+			<td>${bvo.has_file }</td>
 		
 		</tr>
 		

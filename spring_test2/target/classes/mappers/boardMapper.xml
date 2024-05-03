@@ -8,10 +8,15 @@
 	(#{title},#{writer},#{content})
 	</insert>
    <select id="getList" resultType="com.ezen.www.domain.BoardVO">
-   SELECT * FROM board WHERE isDel='N' ORDER BY bno DESC
+   SELECT * FROM board 
+   WHERE isDel='N' 
+   <include refid="search"></include>
+   ORDER BY bno DESC 
+   LIMIT #{pageStart}, #{qty}
    </select>
    <select id="getDeail" resultType="com.ezen.www.domain.BoardVO">
-   SELECT * FROM board WHERE bno = #{bno}
+   SELECT * FROM board 
+   WHERE bno = #{bno} 
    </select>
    <update id="update">
    	UPDATE board SET title=#{title},content=#{content} WHERE bno =#{bno}
@@ -19,5 +24,37 @@
    <update id="delete">
    	UPDATE board SET isDel = "Y" WHERE bno = #{bno}
    </update>
+   <select id="getTotal" resultType="int">
+   	SELECT COUNT(bno) FROM board WHERE isDel = "N" 
+   	<include refid="search"></include>
+   </select>
+    <select id="selectOneBno" resultType="int">
+ 	select max(bno) from board where isDel ="N";
+ 	</select>
+   
+   
+   <!-- search line  -->
+   <sql id="search">
+   		<if test="type!=null">
+   			<trim prefix="and (" suffix=")" suffixOverrides="or">
+   				<foreach collection="typeToArray" item="type">
+   					<trim suffix="or">
+   						<choose>
+   							<when test="type == 't'.toString()">
+   								title like concat('%',#{keyword},'%')
+   							</when>
+   							<when test="type == 'w'.toString()">
+   								writer like concat('%',#{keyword},'%')
+   							</when>
+   							<when test="type == 'c'.toString()">
+   								content like concat('%',#{keyword},'%')
+   							</when>
+   						</choose>
+   					</trim>
+   				</foreach>
+   			</trim>
+   		
+   		</if>
+   </sql>
    
    </mapper>

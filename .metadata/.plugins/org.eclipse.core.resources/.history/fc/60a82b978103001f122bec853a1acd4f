@@ -1,9 +1,0 @@
-package com.ezen.test.serivce;
-
-import com.ezen.test.domain.CommentVO;
-
-public interface CommentService {
-
-	int post(CommentVO cvo);
-
-}

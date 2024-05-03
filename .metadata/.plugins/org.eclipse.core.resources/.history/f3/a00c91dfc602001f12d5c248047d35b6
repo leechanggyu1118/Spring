@@ -1,9 +1,0 @@
-package com.ezen.test.serivce;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class MemberServiceLmpl implements MemberService {
-	
-
-}

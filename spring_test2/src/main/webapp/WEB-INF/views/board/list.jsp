@@ -6,7 +6,7 @@
 <div class="container-md">
 	<h1>Board list Page</h1>
 	<!-- 검색라인  -->
-<%-- <form action="/board/list" class="row row-cols-lg-auto g-3 align-items-center">
+<form action="/board/list" class="row row-cols-lg-auto g-3 align-items-center">
   <div class="col-12">
     <label class="visually-hidden" for="inlineFormInputGroupUsername">입력해주세요</label>
     <div class="input-group">
@@ -43,7 +43,7 @@
   </span>
 </button>
   </div>
-</form> --%>
+</form> 
 	<br>
 	
 	
@@ -79,22 +79,22 @@
 	
 	</table>
 	<!-- 페이지네이션라인  -->
-<%-- 	<nav aria-label="Page navigation example">
+	<nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
-  <c:if test="${ph.prev }">
-    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${ph.startPage-1}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">Previous</a></li>
-  </c:if>
+ 
+    <li class="page-item ${ph.prev eq false ? 'disables' : ''}"><a class="page-link" href="/board/list?pageNo=${ph.startPage-1}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">Previous</a></li>
+  
     
     <c:forEach begin="${ph.startPage }" end="${ph.endPage }" var="i">
-    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${i}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">${i }</a></li>
+    <li class="page-item ${ph.pgvo.pageNo eq i ? 'active' : '' }"><a class="page-link" href="/board/list?pageNo=${i}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">${i}</a></li>
     </c:forEach>
 
     
-    <c:if test="${ph.next }">
-    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${ph.endPage+1}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">Next</a></li>
-    </c:if>
+  
+    <li class="page-item ${ph.prev eq false ? 'disables' : ''}"><a class="page-link" href="/board/list?pageNo=${ph.endPage+1}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">Next</a></li>
+  
   </ul>
-</nav> --%>
+</nav> 
 	
 	
 </div>

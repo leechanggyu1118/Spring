@@ -1,6 +1,0 @@
-package com.ezen.test.serivce;
-
-
-public interface CommentService {
-
-}

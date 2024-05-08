@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <jsp:include page="../layout/header.jsp"></jsp:include>
 
 <h1>Board Detail Page</h1>
@@ -8,6 +9,7 @@
  <c:set value="${bdto.bvo }" var="bvo"></c:set> 
  
 <div class="container-md">
+	<sec:authentication property="principal.uvo.nickName" var="authNick"/>
 	<form action="/board/insert" method="post" >
 
 		<div class="mb-3">
@@ -85,7 +87,7 @@
 		<!-- Comment line  -->
 		<!-- 댓글 등록 라인  -->
 	<div class="input-group mb-3">
-			<span class="input-group-text" id="cmtWriter">${ses.id }</span> 
+			<span class="input-group-text" id="cmtWriter">${authNick }</span> 
 			<input type="text" id="cmtText" class="form-control"
 				placeholder="Add Comment..." aria-label="Username"
 				aria-describedby="basic-addon1">

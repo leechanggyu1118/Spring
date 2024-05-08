@@ -5,7 +5,7 @@
 	<jsp:include page="../layout/header.jsp"></jsp:include>
 	<div class="container-md">
 <h1>Member Join Page</h1>
-<form action="/member/register" method="post">
+<form action="/user/register" method="post">
 		
 
 			<div class="mb-3">

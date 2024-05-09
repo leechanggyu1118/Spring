@@ -1,12 +1,18 @@
 package com.ezen.www.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +41,16 @@ public class UserController {
 	public void register() {}
 	
 	@PostMapping("/register")
-	public String register(UserVO uvo) {
+	public String register(UserVO uvo, Model m) {
+		
+		List<UserVO> userList = usv.getUserList();
+		for(UserVO a : userList) {
+			if(a.getEmail().equals(uvo.getEmail())) {
+				m.addAttribute("isEmail",-1);
+				return "register";
+			}
+		}
+		
 		log.info(">>>> uvo >> {}", uvo);
 		uvo.setPwd(bcEncoder.encode(uvo.getPwd()));
 		int isOk = usv.register(uvo);
@@ -69,15 +84,50 @@ public class UserController {
 	
 	}
 	
-	
-	
-	@GetMapping("/detail")
-	public String userDetail(@RequestParam("email")String email, Model m) {
+	private void logout(HttpServletRequest request, HttpServletResponse response) {
+		Authentication authentication = 
+				SecurityContextHolder
+				.getContext()
+				.getAuthentication();
 		
-		List<UserVO> userDetail = usv.userDetail(email);
-		m.addAllAttributes(userDetail);
-		return "/user/detail";
+		new SecurityContextLogoutHandler()
+			.logout(request, response, authentication);
+	}
+	
+	@GetMapping("/modify")
+	public void modify() {}
+	
+	@PostMapping("/modify")
+	public String userDetail(UserVO uvo,Principal principal ,HttpServletRequest request, HttpServletResponse response) {
+		String email = principal.getName();
+		uvo.setEmail(email);
+	
 		
+		if(uvo.getPwd().isEmpty() && uvo.getPwd().length() == 0) {
+			
+			usv.userModify(uvo);
+			
+		}else {
+			
+			String pwdModify = bcEncoder.encode(uvo.getPwd()); //비번을 다시 인코딩(암호화)하여 업데이트
+			uvo.setPwd(pwdModify);
+			usv.userPwdModify(uvo);
+	
+		}
+
+		logout(request, response);
+		return "redirect:/";
+		
+	}
+	
+	@GetMapping("/deleteUser")
+	public String deleteUser(Principal principal,HttpServletRequest request, HttpServletResponse response) {
+		String email = principal.getName(); //id
+		
+		usv.userAuthDelete(email);
+		usv.userDelete(email);
+		logout(request, response);
+		return "redirect:/";
 	}
 	
 	

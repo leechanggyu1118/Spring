@@ -1,51 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 	<jsp:include page="../layout/header.jsp"></jsp:include>
-	<div class="container-md">
-<h1>Member Join Page</h1>
-<form action="/member/modify" method="post">
+
+<h1>User Member List</h1>
+        <sec:authentication property="principal.uvo.email" var="authEmail"/>
+        <sec:authentication property="principal.uvo.nickName" var="authNick"/>
+        <sec:authentication property="principal.uvo.authList" var="auths"/>
+        <sec:authentication property="principal.uvo.regDate" var="authRegDate"/>
+        <sec:authentication property="principal.uvo.lastLogin" var="authLastLogin"/>
+        <sec:authentication property="principal.uvo.authList" var="authList"/>
+        <sec:authentication property="principal.uvo.pwd" var="authPwd"/>
+
+		<div class="d-flex justify-content-around">
+<form action="/user/modify" method="post">
+	<div class="row">
 		
-			<div class="mb-3">
-				<label for="i" class="form-label">ID</label> 
-				<input type="text" class="form-control" name="id" id="i" readonly="readonly" value="${ses.id }" placeholder="ID...">
-			</div>
-			<div class="mb-3">
-				<label for="i" class="form-label">REG_DATE</label> 
-				<input type="text" class="form-control" name="reg_date" id="i" readonly="readonly" value="${ses.reg_date }" placeholder="ID...">
-			</div>
-			<div class="mb-3">
-				<label for="i" class="form-label">Last-Login</label> 
-				<input type="text" class="form-control" name="last_login" id="i" readonly="readonly" value="${ses.last_login }" placeholder="ID...">
-			</div>
-
-			<div class="mb-3">
-				<label for="p" class="form-label">PassWord</label> 
-				<input type="password" class="form-control" name="pw" id="p" placeholder="Password...">
-			</div>
-			
-			<div class="mb-3">
-				<label for="n" class="form-label">Name</label> 
-				<input type="text" class="form-control" name="name" id="n" value="${ses.email }" placeholder="Name...">
-			</div>
-			
-			<div class="mb-3">
-				<label for="e" class="form-label">E-mail</label> 
-				<input type="email" class="form-control" name="email" id="e" value="${ses.email }" placeholder="example@test.com...">
-			</div>
-			<div class="mb-3">
-				<label for="h" class="form-label">Home</label> 
-				<input type="text" class="form-control" name="home" id="h" value="${ses.home }" placeholder="Home...">
-			</div>
-			<div class="mb-3">
-				<label for="a" class="form-label">Age</label> 
-				<input type="text" class="form-control" name="age" id="a" value="${ses.age }" placeholder="Age...">
-			</div>
-			
-
-			<button type="submit" class="btn btn-primary">Modify</button>
-		<a href="/member/remove"> <button type="button" class="btn btn-danger">remove</button> </a>
-		</form>
-
+			  <div class="col">
+			    <div class="card text-bg-dark mb-3 border-warning mb-3" style="width: 30rem;">
+			      <img src="../re/img/userImg.png" class="card-img-top" alt="...">
+			      <div class="card-body">
+			   	<input type="hidden"  name="email" value="${authEmail }">
+			        <p class="card-title">이메일 : ${authEmail }</p>
+			        <h5 class="card-title">닉네임 : <input type="text" name="nickName" value="${authNick }"></h5>
+			        <h5 class="card-title">비밀번호 : <input type="text" name="pwd" placeholder="보안처리된 비밀번호"></h5>
+			        
+			        <p class="card-title">
+			        ${auths }
+					</p>
+			        
+			        <p class="card-text">아이디 생성일 : ${authRegDate}</p>
+			    <input type="hidden"  name="lastLogin" value="${authLastLogin }">
+			        <p class="card-text">마지막 접속일 : ${authLastLogin }</p>
+			      </div>
+			    </div>
+			  </div>
+		 
+		</div>
+			<a><button type="submit" class="btn btn-warning" id="updateBtn">수정</button></a>
+			<a href="/board/list"><button type="button" class="btn btn-primary">BoardList</button></a>
+			<button type="button" class="btn btn-danger" id="deleteBtn">회원삭제</button>
+</form>
 	</div>
+
+
+	<script type="text/javascript" src="/re/js/userModify.js"></script>
+	
+
+
 		<jsp:include page="../layout/footer.jsp"></jsp:include>

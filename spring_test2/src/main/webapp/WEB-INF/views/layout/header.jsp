@@ -10,7 +10,7 @@
 <link href="/re/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="/re/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="p-3 mb-2 bg-secondary text-white">
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -54,13 +54,13 @@
 		          <a class="nav-link" href="/user/list">회원리스트 ${authNick }(${authEmail } / ADMIN)</a>
 		        </li>
 		        <li class="nav-item">
-	          <a class="nav-link" href="/user/detail">회원정보수정 ${authNick }(${authEmail })</a>
+	          <a class="nav-link" href="/user/modify">회원정보수정 ${authNick }(${authEmail })</a>
 	       		 </li>
         	</c:when>
 			<c:otherwise>
 			
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">회원정보수정 ${authNick }(${authEmail })</a>
+	          <a class="nav-link" href="/user/modify">회원정보수정 ${authNick }(${authEmail })</a>
 	        </li>
 			
 			</c:otherwise>

@@ -28,7 +28,23 @@
   	<select id="getUserList" resultType="com.ezen.www.domain.UserVO">
   		SELECT * FROM user
   	</select>
-  	<select id="userDetail" resultType="com.ezen.www.domain.UserVO">
-  		SELECT * FROM user WHERE email = #{email}
-  	</select>
+  	
+  	<update id="userModify">
+  		UPDATE user SET nick_name = #{nickName}, last_login = NOW() WHERE email = #{email}
+  	</update>
+  	
+  	<update id="userPwdModify">
+  		UPDATE user SET nick_name = #{nickName}, pwd = #{pwd}, last_login = NOW() WHERE email = #{email}
+  	</update>
+  	
+  	<delete id="userAuthDelete">
+  		DELETE FROM auth_user WHERE email = #{email}
+  	</delete>
+  	
+  	<delete id="userDelete">
+  		DELETE FROM user where email = #{email}
+  	</delete>
+  	
+  
+
   </mapper>

@@ -44,9 +44,33 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
-	@Override
-	public List<UserVO> userDetail(String email) {
+
+	public void userModify(UserVO uvo) {
 		// TODO Auto-generated method stub
-		return udao.userDetail(email);
+		 udao.userModify(uvo);
 	}
+
+	@Override
+	public void userAuthDelete(String email) {
+		// TODO Auto-generated method stub
+		udao.userAuthDelete(email);
+		
+	}
+
+	@Override
+	public void userDelete(String email) {
+		// TODO Auto-generated method stub
+		udao.userDelete(email);
+		
+	}
+
+	@Override
+	public void userPwdModify(UserVO uvo) {
+		// TODO Auto-generated method stub
+		udao.userPwdModify(uvo);
+	}
+
+
+
+
 }

@@ -12,7 +12,7 @@
 	<c:forEach items="${userList }" var="uvo">
 	
 	  <div class="col">
-	    <div class="card text-bg-dark mb-3 border-warning mb-3" style="width: 20rem;">
+	    <div class="card text-bg-dark mb-3 border-warning mb-3" style="width: 25rem;">
 	      <img src="../re/img/userImg.png" class="card-img-top" alt="...">
 	      <div class="card-body">
 	        <h5 class="card-title">닉네임 : ${uvo.nickName }</h5>
@@ -34,10 +34,6 @@
 </div>
  </div>
 </div>
-
-
-		
-
 
 
 		<jsp:include page="../layout/footer.jsp"></jsp:include>

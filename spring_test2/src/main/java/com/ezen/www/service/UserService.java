@@ -12,6 +12,21 @@ public interface UserService {
 
 	List<UserVO> getUserList();
 
-	List<UserVO> userDetail(String email);
+	void userModify(UserVO uvo);
+
+	void userPwdModify(UserVO uvo);
+
+	void userAuthDelete(String email);
+
+	void userDelete(String email);
+
+
+
+
+
+
+
+
+	
 
 }

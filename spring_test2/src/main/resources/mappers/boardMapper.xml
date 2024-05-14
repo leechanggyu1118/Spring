@@ -31,7 +31,16 @@
     <select id="selectOneBno" resultType="int">
  	select max(bno) from board where isDel ="N";
  	</select>
-   
+     <update id="cmtCountUpdate">
+ 	UPDATE board b SET cmt_qty = (
+	SELECT count(bno) FROM comment
+	WHERE bno = b.bno) ;
+  </update>
+  <update id="fileCountUpdae">
+ 	UPDATE board b SET has_file = (
+	SELECT count(bno) FROM file
+	WHERE bno = b.bno) ;
+  </update>
    
    <!-- search line  -->
    <sql id="search">

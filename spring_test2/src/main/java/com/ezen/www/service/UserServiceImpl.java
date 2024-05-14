@@ -70,6 +70,12 @@ public class UserServiceImpl implements UserService {
 		udao.userPwdModify(uvo);
 	}
 
+	@Override
+	public int checkEmail(String email) {
+		// TODO Auto-generated method stub
+		return udao.checkEmail(email);
+	}
+
 
 
 

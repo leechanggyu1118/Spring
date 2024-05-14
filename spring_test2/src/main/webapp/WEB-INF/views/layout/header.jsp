@@ -9,8 +9,18 @@
 <title>header.jsp</title>
 <link href="/re/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="/re/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<style>
+body{
+        height: 100vh;
+        width: 100vw;
+        background-repeat : no-repeat;
+        background-size : cover;
+        background-position: center;
+}
+
+</style>
 </head>
-<body class="p-3 mb-2 bg-secondary text-white">
+<body class="p-3 mb-2 bg-secondary text-white" background="../re/img/back.jpg">
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -44,6 +54,10 @@
         <sec:authentication property="principal.uvo.email" var="authEmail"/>
         <sec:authentication property="principal.uvo.nickName" var="authNick"/>
         <sec:authentication property="principal.uvo.authList" var="auths"/>
+        <sec:authentication property="principal.uvo.regDate" var="authRegDate"/>
+        <sec:authentication property="principal.uvo.lastLogin" var="authLastLogin"/>
+        <sec:authentication property="principal.uvo.authList" var="authList"/>
+        <sec:authentication property="principal.uvo.pwd" var="authPwd"/>
         <li class="nav-item">
           <a class="nav-link" href="/board/register">게시판 글쓰기</a>
         </li>

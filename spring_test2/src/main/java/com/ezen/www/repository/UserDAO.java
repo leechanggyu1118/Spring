@@ -27,6 +27,8 @@ public interface UserDAO {
 
 	void userDelete(String email);
 
+	int checkEmail(String email);
+
 
 	
 

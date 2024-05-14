@@ -6,8 +6,8 @@
 <div class="container-md " >
 
 <h1>User Member List</h1>
+<div class="container text-center">
 <div class="row">
-<div class="d-flex justify-content-around">
 
 	<c:forEach items="${userList }" var="uvo">
 	

@@ -76,13 +76,13 @@ function spreadCommentList(bno, page=1){
          }
             for(let cvo of result.cmtList){
                 let li = `<li class="list-group-item" data-cno="${cvo.cno}">`;
-                li += `<div class="input-group mb-3"> no. ${cvo.cno} |`;
-                li += `<div class="fw-bold">${cvo.writer}</div>`;
-                li += `${cvo.content}`;
-                li += `</div>`;
+                li += `<div class="input-group mb-3"> no. ${cvo.cno} | 작성자 : ${cvo.writer}</div>`;
+                li += ` <div class="fw-bold"><button type="button" class="btn btn-dark">댓글 : ${cvo.content}</div>`;
                 li += `<span class="badge rounded-pill text-bg-warning">${cvo.regDate}</span>`;
-                li += `<button type="button" class="btn btn-outline-warning btm-sm mod" data-bs-toggle="modal" data-bs-target="#myModal">%</button>`;
-                li += `<button type="button" data-cno="${cvo.cno}" class="btn btn-outline-danger btm-sm del">X</button>`;
+                if(authNick === cvo.writer){
+                    li += `<button type="button" class="btn btn-outline-warning btm-sm mod" data-bs-toggle="modal" data-bs-target="#myModal">수정</button>`;
+                    li += `<button type="button" data-cno="${cvo.cno}" class="btn btn-outline-danger btm-sm del">삭제</button>`;
+                }
                 li += `</li>`;
                 ul.innerHTML += li;
             }

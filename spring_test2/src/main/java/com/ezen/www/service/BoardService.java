@@ -24,4 +24,6 @@ public interface BoardService {
 
 	int update(BoardDTO boardDTO);
 
+	void cmtFileUpdate();
+
 }

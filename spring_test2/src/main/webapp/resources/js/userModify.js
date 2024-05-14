@@ -15,3 +15,4 @@ document.getElementById("updateBtn").addEventListener('click',(e)=>{
     alert("다시 로그인 해주세요.")
 
 });
+

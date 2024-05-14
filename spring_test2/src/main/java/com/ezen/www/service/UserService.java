@@ -20,6 +20,8 @@ public interface UserService {
 
 	void userDelete(String email);
 
+	int checkEmail(String email);
+
 
 
 

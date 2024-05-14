@@ -3,11 +3,8 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="layout/header.jsp"></jsp:include>
 
-<div class="container-md">
-<h1>
-	My First Spring Project
-</h1>
-<br>
+<div class="d-flex justify-content-evenly" background="../re/img/userImg.png">
+<h1>My First Spring Project</h1>
 
 </div>
 <br>

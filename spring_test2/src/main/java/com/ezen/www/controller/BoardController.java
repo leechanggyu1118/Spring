@@ -56,6 +56,8 @@ public class BoardController {
 	@GetMapping("/list")
 	public String list(Model m, PagingVO pgvo) {
 		log.info(">>> pagingVO >> {}", pgvo);
+		//cmt_qty, has_file update 후 리스트 가져오기
+		bsv.cmtFileUpdate();
 		
 		//페이징 처리 추가
 		List<BoardVO> list = bsv.getList(pgvo);

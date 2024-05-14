@@ -45,6 +45,10 @@
   		DELETE FROM user where email = #{email}
   	</delete>
   	
+  	<select id="checkEmail" resultType="int">
+  		SELECT COUNT(*) FROM user WHERE email = #{email}
+  	</select>
+  	
   
 
   </mapper>

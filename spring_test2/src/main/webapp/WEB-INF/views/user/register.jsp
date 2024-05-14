@@ -12,7 +12,9 @@
 			<div class="mb-3">
 				<label for="e" class="form-label">E-mail</label> 
 				<input type="email" class="form-control" name="email" id="e" placeholder="example@test.com...">
-				<button type="button" id="checkBtn"></button>
+				<br>
+				<button type="button" id="checkBtn" class="btn btn-outline-warning">아이디 중복체크</button>
+				<div id="check"></div>
 			</div>
 			
 			<div class="mb-3">
@@ -33,11 +35,7 @@
 	</div>
 	
 	<!-- 아이디가 같으면..?  -->
-	<script type="text/javascript" >
-		const isEmail = `<c:out value="${isEmail }"></c:out>`;
-		if(isEmail == "-1"){
-			alert("중복된 아이디입니다. 다시 입력해주세요");
-		}
-	</script>
+	
+	<script type="text/javascript" src="/re/js/userRegister.js"></script>
 	
 		<jsp:include page="../layout/footer.jsp"></jsp:include>

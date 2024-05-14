@@ -7,17 +7,7 @@
 	<h1>Board list Page</h1>
 	<!-- 검색라인  -->
 <form action="/board/list" class="row row-cols-lg-auto g-3 align-items-center">
-  <div class="col-12">
-    <label class="visually-hidden" for="inlineFormInputGroupUsername">입력해주세요</label>
-    <div class="input-group">
-      <div class="input-group-text">
-     </div>
-      <input type="text" name="keyword" class="form-control" id="inlineFormInputGroupUsername" value="${ph.pgvo.keyword }" placeholder="입력해주세요.">
-      <input type="hidden" name="pageNo" value="1">
-      <input type="hidden" name="qty" value="10">
-     
-    </div>
-  </div>
+  
 
   <div class="col-12">
     <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
@@ -32,6 +22,17 @@
       <option value="twc" ${ph.pgvo.type eq 'twc' ? 'selected' : '' }>All</option>
 
     </select>
+  </div>
+  <div class="col-12">
+    <label class="visually-hidden" for="inlineFormInputGroupUsername">입력해주세요</label>
+    <div class="input-group">
+      <div class="input-group-text">
+     </div>
+      <input type="text" name="keyword" class="form-control" id="inlineFormInputGroupUsername" value="${ph.pgvo.keyword }" placeholder="입력해주세요.">
+      <input type="hidden" name="pageNo" value="1">
+      <input type="hidden" name="qty" value="10">
+     
+    </div>
   </div>
 
   <div class="col-12">
@@ -81,8 +82,9 @@
 	<!-- 페이지네이션라인  -->
 	<nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
- 
-    <li class="page-item ${ph.prev eq false ? 'disables' : ''}"><a class="page-link" href="/board/list?pageNo=${ph.startPage-1}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">Previous</a></li>
+ 	<c:if test="${ph.prev }">
+    	<li class="page-item ${ph.prev eq false ? 'disables' : ''}"><a class="page-link" href="/board/list?pageNo=${ph.startPage-1}&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">Previous</a></li>
+ 	</c:if>
   
     
     <c:forEach begin="${ph.startPage }" end="${ph.endPage }" var="i">

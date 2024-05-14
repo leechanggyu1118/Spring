@@ -100,4 +100,11 @@ public class BoardServiceImpl implements BoardService {
 		return isOk;
 	}
 
+	@Override
+	public void cmtFileUpdate() {
+		// TODO Auto-generated method stub
+		bdao.cmtCountUpdate();
+		bdao.fileCountUpdae();
+	}
+
 }
